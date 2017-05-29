@@ -1,0 +1,9 @@
+[submodule ".spacemacs.d/plugins/nix-emacs"]
+	path = .spacemacs.d/plugins/nix-emacs
+	url = git@github.com:travisbhartwell/nix-emacs.git
+[submodule ".spacemacs.d/plugins/rust-snippets"]
+	path = .spacemacs.d/plugins/rust-snippets
+	url = git@github.com:freebroccolo/rust-snippets.git
+[submodule ".spacemacs.d/layers/spacemacs-cmake-ide"]
+	path = .spacemacs.d/layers/spacemacs-cmake-ide
+	url = git@github.com:bkchr/spacemacs-cmake-ide.git
