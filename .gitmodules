@@ -7,3 +7,6 @@
 [submodule ".spacemacs.d/layers/spacemacs-cmake-ide"]
 	path = .spacemacs.d/layers/spacemacs-cmake-ide
 	url = git@github.com:bkchr/spacemacs-cmake-ide.git
+[submodule ".emacs.d"]
+	path = .emacs.d
+	url = https://github.com/syl20bnr/spacemacs
