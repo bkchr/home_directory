@@ -23,5 +23,5 @@
 (require 'direnv)
 (direnv-mode)
 
-(setq-default whitespace-style (face tabs spaces lines-trail))
+(setq-default whitespace-style '(face tabs spaces lines-trail))
 

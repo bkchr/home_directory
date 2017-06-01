@@ -4,7 +4,7 @@ let
 in
 stdenv.mkDerivation {
   name = "superscale";
-  buildInputs = [ myrust elixir go erlang openssl llvm minicom json_c qemu iw pkgconfig elixir ];
+  buildInputs = [ myrust elixir go erlang openssl llvm minicom json_c qemu iw pkgconfig elixir qemu socat ];
   RUST_SRC_PATH="${myrust}/lib/rustlib/src/rust/src";
   GOPATH="$PWD/gopath";
 }
