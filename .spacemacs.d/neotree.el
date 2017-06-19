@@ -1,4 +1,5 @@
-(setq neo-vc-integration (quote (face)))
+(setq-default neo-vc-integration (quote (face)))
+(setq-default neo-autorefresh t)
 
 (defun my-neo-buffer--refresh (save-pos-p &optional non-neotree-buffer)
   "Refresh the NeoTree buffer.
@@ -51,6 +52,6 @@ If path is nil and no buffer file name, then use DEFAULT-PATH,"
           (my-neotree-find npath
                            (buffer-file-name)))))))
 
-(add-hook 'switch-buffer-functions
-          (lambda (prev cur)
-            (jj-neotree-find cur)))
+;;(add-hook 'switch-buffer-functions
+;;          (lambda (prev cur)
+;;            (jj-neotree-find cur)))
