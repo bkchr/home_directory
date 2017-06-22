@@ -12,3 +12,5 @@
 (autoload 'rust-snippets/initialize "rust-snippets")
 (eval-after-load 'yasnippet
   '(rust-snippets/initialize))
+
+(setq-default racer-rust-src-path nil)
