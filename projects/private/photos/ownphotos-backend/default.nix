@@ -1,7 +1,9 @@
 with import <nixpkgs> {};
+
 let
+  myboost = pkgs.boost.override({python=python35;});
   python3dlib = pkgs.python35Packages.buildPythonPackage rec {
-      name = "toolz-${version}";
+      name = "dlib-${version}";
       version = "19.4.0";
 
       src = pkgs.fetchurl {
@@ -9,22 +11,17 @@ let
         sha256 = "1f4m13y365qx1y7q87xywgsqyvlq9r0scarf741zfyrdshnifg62";
       };
 
-      propagatedBuildInputs = [ cmake boost ];
+      buildInputs = with python35Packages; [ cmake myboost.dev pkgconfig python35 ];
 
       meta = {
         homepage = "https://github.com/davisking/dlib";
         description = "A toolkit for making real world machine learning and data analysis applications";
       };
     };
+  mypython=pkgs.python35.withPackages (ps: [ python3dlib ps.numpy ps.scipy ps.scikitlearn ps.pip ps.matplotlib ps.virtualenv ]);
 in
 stdenv.mkDerivation {
   name = "ownphotos-backend";
-  buildInputs = [ python3 python3dlib python3Packages.pip python3Packages.virtualenv freetype libpng libjpeg pkgconfig postgresql python3Packages.numpy python3Packages.scipy ];
-  shellHook = ''
-  # set SOURCE_DATE_EPOCH so that we can use python wheels
-  SOURCE_DATE_EPOCH=$(date +%s)
-  virtualenv --no-setuptools venv
-  export PATH=$PWD/venv/bin:$PATH
-  pip install -r requirements.txt
-  '';
+  buildInputs = [ mypython freetype libpng libjpeg pkgconfig postgresql myboost ];
 }
+
