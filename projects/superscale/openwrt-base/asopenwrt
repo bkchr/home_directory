@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+TOP=~/projects/superscale/openwrt-base
+case $1 in
+    mipsel)
+        PRE=mipsel
+        CPU=mipsel_1004kc+dsp
+        ;;
+    mips)
+        PRE=mips
+        CPU=mips_34kc
+        ;;
+    *)
+        echo "specifify mips or mipsel"
+        exit 3
+        ;;
+esac
+export XPATH="${TOP}/staging_dir/toolchain-${CPU}_gcc-5.4.0_musl-1.1.15/bin/"
+export CC=${PRE}-openwrt-linux-gcc
+export CXX=${PRE}-openwrt-linux-g++
+export STAGING_DIR="${TOP}/staging_dir/target-${CPU}_musl-1.1.15/"
+export XSHELL=asopenwrt
+export PATH=$PATH:$XPATH
+$SHELL
