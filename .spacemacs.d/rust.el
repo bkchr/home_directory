@@ -1,10 +1,10 @@
 (add-to-list 'load-path "/home/bastian/.spacemacs.d/plugins/lsp-rust")
+(add-to-list 'load-path "/home/bastian/.spacemacs.d/plugins/lsp-mode")
 
 (require 'lsp-rust)
 (require 'lsp-mode)
 (require 'lsp-flycheck)
 
-(setq-default lsp-rust-rls-path "/home/bastian/.cargo/bin/rls")
 (defun my-lsp-mode-hook ()
   (direnv-update-environment default-directory)(lsp-mode))
 

@@ -65,7 +65,6 @@ values."
                                       google-c-style
                                       switch-buffer-functions
                                       nix-sandbox
-                                      lsp-mode
                                       direnv)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
