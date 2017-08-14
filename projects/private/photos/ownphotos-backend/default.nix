@@ -22,6 +22,6 @@ let
 in
 stdenv.mkDerivation {
   name = "ownphotos-backend";
-  buildInputs = [ mypython freetype libpng libjpeg pkgconfig postgresql myboost ];
+  buildInputs = [ mypython freetype libpng libjpeg pkgconfig postgresql myboost torch ];
 }
 

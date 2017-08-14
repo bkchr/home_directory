@@ -26,3 +26,5 @@
   '(rust-snippets/initialize))
 
 (setq-default racer-rust-src-path nil)
+
+(add-to-list 'grep-find-ignored-files "*.rlib")
