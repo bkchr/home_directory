@@ -1,14 +1,15 @@
 (add-to-list 'load-path "/home/bastian/.spacemacs.d/plugins/lsp-rust")
 (add-to-list 'load-path "/home/bastian/.spacemacs.d/plugins/lsp-mode")
 
-(require 'lsp-rust)
-(require 'lsp-mode)
-(require 'lsp-flycheck)
+;(require 'lsp-rust)
+;(require 'lsp-mode)
+;(require 'lsp-flycheck)
 
 (defun my-lsp-mode-hook ()
   (direnv-update-environment default-directory)(lsp-mode))
 
-(add-hook 'rust-mode-hook 'my-lsp-mode-hook)
+(setq-default rustrls-lsp-mode-hook 'my-lsp-mode-hook)
+;(add-hook 'rust-mode-hook 'my-lsp-mode-hook)
 
 ;;(add-hook 'rust-mode-hook 'ycmd-mode)
 (defun my-rust-column-length ()
@@ -27,4 +28,4 @@
 
 (setq-default racer-rust-src-path nil)
 
-(add-to-list 'grep-find-ignored-files "*.rlib")
+;(add-to-list 'grep-find-ignored-files "*.rlib")

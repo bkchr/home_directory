@@ -16,3 +16,6 @@
 [submodule ".spacemacs.d/plugins/lsp-rust"]
 	path = .spacemacs.d/plugins/lsp-rust
 	url = git@github.com:bkchr/lsp-rust.git
+[submodule ".spacemacs.d/layers/rustrls"]
+	path = .spacemacs.d/layers/rustrls
+	url = git@github.com:MaikKlein/rustrls.git
