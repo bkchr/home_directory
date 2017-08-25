@@ -18,8 +18,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.cl\\'" . c-mode))
 
-(setq company-idle-delay 0)
-;(define-key c-mode-map [(tab)] 'company-complete)
 ;(define-key c++-mode-map [(tab)] 'company-complete)
 
 (require 'semantic/bovine/gcc)

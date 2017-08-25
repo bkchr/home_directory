@@ -132,7 +132,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 18
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.3)
@@ -279,7 +279,8 @@ you should place you code here."
   (load-file "~/.spacemacs.d/latex.el")
   (load-file "~/.spacemacs.d/org.el")
   (load-file "~/.spacemacs.d/org-journal.el")
-  (load-file "~/.spacemacs.d/cpp.el")
+  ;;(load-file "~/.spacemacs.d/cpp.el")
+  (load-file "~/.spacemacs.d/company.el")
   ;;(load-file "~/.spacemacs.d/grammar.el")
   (load-file "~/.spacemacs.d/flycheck.el")
   (load-file "~/.spacemacs.d/neotree.el")

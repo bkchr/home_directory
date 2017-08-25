@@ -31,3 +31,7 @@ threaded system and the forced deferred makes errors never show
 up before you execute another command."
   (flycheck-clear-idle-change-timer)
   (flycheck-buffer-automatically 'idle-change))
+
+
+(setq flycheck-executable-find
+      (lambda (cmd) (direnv-update-environment default-directory)(executable-find cmd)))

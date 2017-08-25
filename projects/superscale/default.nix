@@ -1,6 +1,6 @@
 with import <nixpkgs> {};
 let
-  myrust = (rustChannels.stable.rust.override { extensions = [ "rust-src" "rust-analysis" ]; targets = [ "mips-unknown-linux-musl" ]; targetExtensions = [ "rust-analysis" ]; });
+  myrust = (latest.rustChannels.nightly.rust.override { extensions = [ "rust-src" "rust-analysis" ]; targets = [ "mips-unknown-linux-musl" ]; });
 in
 stdenv.mkDerivation {
   name = "superscale";
