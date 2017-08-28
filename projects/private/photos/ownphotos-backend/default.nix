@@ -18,7 +18,7 @@ let
         description = "A toolkit for making real world machine learning and data analysis applications";
       };
     };
-  mypython=pkgs.python35.withPackages (ps: [ python3dlib ps.numpy ps.scipy ps.scikitlearn ps.pip ps.matplotlib ps.virtualenv ]);
+  mypython=pkgs.python35.withPackages (ps: [ python3dlib ps.numpy ps.scipy ps.scikitlearn ps.pip ps.matplotlib ps.virtualenv ps.nltk ]);
 in
 stdenv.mkDerivation {
   name = "ownphotos-backend";
