@@ -1,4 +1,5 @@
 (defun my-lsp-mode-hook ()
+  (lsp-rust-set-build-lib t)
   (direnv-update-environment default-directory)(lsp-mode))
 
 (setq-default rustrls-lsp-mode-hook 'my-lsp-mode-hook)
@@ -17,5 +18,6 @@
   '(rust-snippets/initialize))
 
 (setq-default racer-rust-src-path nil)
+
 
 ;(add-to-list 'grep-find-ignored-files "*.rlib")
