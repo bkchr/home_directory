@@ -33,5 +33,5 @@ up before you execute another command."
   (flycheck-buffer-automatically 'idle-change))
 
 
-(setq flycheck-executable-find
-      (lambda (cmd) (direnv-update-environment default-directory)(executable-find cmd)))
+;(setq flycheck-executable-find
+;      (lambda (cmd) (direnv-update-environment default-directory)(executable-find cmd)))
