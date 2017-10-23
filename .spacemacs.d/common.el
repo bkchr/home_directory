@@ -1,8 +1,8 @@
 (frame-parameter nil 'environment)
 
 ;; Do not paste the highlighted text when it should be replaced
-(setq save-interprogram-paste-before-kill
-      t)
+;(setq save-interprogram-paste-before-kill
+;      t)
 
 (defun my-save-if-bufferfilename ()
   (if (buffer-file-name)
@@ -24,4 +24,3 @@
 (direnv-mode)
 
 (setq-default whitespace-style '(face tabs spaces lines-trail))
-

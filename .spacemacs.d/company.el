@@ -1,6 +1,6 @@
 (global-company-mode t)
 
-(define-key rust-mode-map [(tab)] 'company-complete)
+;;(define-key rust-mode-map [(tab)] 'company-complete)
 
 (setq company-idle-delay 0.03)
 ;(setq company-minimum-prefix-length 1)
