@@ -66,6 +66,8 @@ values."
                                       google-c-style
                                       switch-buffer-functions
                                       nix-sandbox
+				      (lsp-mode :location "/home/bastian/.spacemacs.d/plugins/lsp-mode/")
+				      (company-lsp :location "/home/bastian/.spacemacs.d/plugins/company-lsp/")
                                       direnv)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
