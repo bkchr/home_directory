@@ -16,9 +16,10 @@
 (setq large-file-warning-threshold nil)
 (setq dotspacemacs-large-file-size 9999999)
 
-(setq-default js-indent-level 2)
-(setq-default js2-basic-offset 2)
-(setq-default js3-indent-level 2)
+;;(setq-default js-indent-level 2)
+;;(setq-default js2-basic-offset 2)
+;;(setq-default js3-indent-level 2)
+;;(setq tab-width 4)
 
 (require 'direnv)
 (direnv-mode)
