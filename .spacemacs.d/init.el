@@ -69,6 +69,7 @@ values."
 				      (lsp-mode :location "/home/bastian/.spacemacs.d/plugins/lsp-mode/")
 				      (company-lsp :location "/home/bastian/.spacemacs.d/plugins/company-lsp/")
 				      (lsp-rust :location "/home/bastian/.spacemacs.d/plugins/lsp-rust/")
+				      (lsp-ui :location "/home/bastian/.spacemacs.d/plugins/lsp-ui/")
                                       direnv)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()

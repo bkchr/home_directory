@@ -1,3 +1,4 @@
+(require 'lsp-rust)
 (defun my-lsp-mode-hook ()
   (lsp-rust-set-build-lib t)
   (direnv-update-environment default-directory)(lsp-rust-enable))
@@ -22,5 +23,5 @@
 
 ;(add-to-list 'grep-find-ignored-files "*.rlib")
 
-(set-face-attribute 'lsp-face-highlight-read nil :background "gray")
-(set-face-attribute 'lsp-face-highlight-write nil :background "SteelBlue1")
+;(set-face-attribute 'lsp-face-highlight-read nil :background "gray")
+;(set-face-attribute 'lsp-face-highlight-write nil :background "SteelBlue1")

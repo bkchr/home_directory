@@ -22,3 +22,6 @@
 [submodule ".spacemacs.d/plugins/company-lsp"]
 	path = .spacemacs.d/plugins/company-lsp
 	url = git@github.com:tigersoldier/company-lsp.git
+[submodule ".spacemacs.d/plugins/lsp-ui"]
+	path = .spacemacs.d/plugins/lsp-ui
+	url = git@github.com:emacs-lsp/lsp-ui.git
