@@ -4,6 +4,6 @@ let
 in
 stdenv.mkDerivation {
   name = "private";
-  buildInputs = [ myrust nodejs openssl pkgconfig cmake zlib ];
+  buildInputs = [ myrust ];
   RUST_SRC_PATH="${myrust}/lib/rustlib/src/rust/src";
 }
