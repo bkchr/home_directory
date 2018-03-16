@@ -9,7 +9,7 @@
 	url = git@github.com:bkchr/spacemacs-cmake-ide.git
 [submodule ".emacs.d"]
 	path = .emacs.d
-	url = https://github.com/syl20bnr/spacemacs
+	url = git@github.com:bkchr/spacemacs.git
 [submodule ".spacemacs.d/plugins/lsp-mode"]
 	path = .spacemacs.d/plugins/lsp-mode
 	url = git@github.com:bkchr/lsp-mode.git

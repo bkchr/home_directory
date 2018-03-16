@@ -1,4 +1,3 @@
-(load "/run/current-system/sw/share/emacs/site-lisp/nix-mode.el")
 (require 'nix-mode)
 
 ;;(add-hook 'rust-mode-hook (lambda () (message "Test")
