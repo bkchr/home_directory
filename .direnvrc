@@ -35,6 +35,6 @@ use_nix_shell() {
       --add-root "$wd/dep" --indirect >/dev/null
   fi
 
-  direnv_load nix-shell "$drvfile" --run 'direnv dump'
+  direnv_load nix-shell $(readlink -f $drvfile) --run 'direnv dump'
   watch_file "$shellfile"
-};
+}
