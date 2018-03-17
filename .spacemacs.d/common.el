@@ -20,6 +20,7 @@
 ;;(setq-default js2-basic-offset 2)
 ;;(setq-default js3-indent-level 2)
 ;;(setq tab-width 4)
+(setq c-basic-offset 4)
 
 (require 'direnv)
 (direnv-mode)
