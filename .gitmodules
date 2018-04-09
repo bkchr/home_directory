@@ -18,7 +18,7 @@
 	url = git@github.com:bkchr/lsp-rust.git
 [submodule ".spacemacs.d/layers/rustrls"]
 	path = .spacemacs.d/layers/rustrls
-	url = git@github.com:MaikKlein/rustrls.git
+	url = git@github.com:bkchr/rustrls.git
 [submodule ".spacemacs.d/plugins/company-lsp"]
 	path = .spacemacs.d/plugins/company-lsp
 	url = git@github.com:tigersoldier/company-lsp.git
