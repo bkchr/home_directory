@@ -1,40 +1,76 @@
-# Usage: use nix_shell
+# Usage: use_nix [...]
 #
-# Works like use_nix, except that it's only rebuilt if the shell.nix or default.nix file changes.
-# This avoids scenarios where the nix-channel is being updated and all the projects now need to be re-built.
+# Load environment variables from `nix-shell`.
+# If you have a `default.nix` or `shell.nix` one of these will be used and
+# the derived environment will be stored at ./.direnv/env-<hash>
+# and symlink to it will be created at ./.direnv/default.
+# Dependencies are added to the GC roots, such that the environment remains persistent.
 #
-# To force the reload the derivation, run `touch shell.nix`
+# Packages can also be specified directly via e.g `use nix -p ocaml`,
+# however those will not be added to the GC roots.
+#
+# The resulting environment is cached for better performance.
+#
+# To trigger switch to a different environment:
+# `rm -f .direnv/default`
+#
+# To derive a new environment:
+# `rm -rf .direnv/env-$(md5sum {shell,default}.nix 2> /dev/null | cut -c -32)`
+#
+# To remove cache:
+# `rm -f .direnv/dump-*`
+#
+# To remove all environments:
+# `rm -rf .direnv/env-*`
+#
+# To remove only old environments: 
+# `find .direnv -name 'env-*' -and -not -name `readlink .direnv/default` -exec rm -rf {} +`
+#
 use_nix_shell() {
-  local shellfile=shell.nix
-  local wd=$PWD/.direnv/nix
-  local drvfile=$wd/shell.drv
+    set -e
 
-  # same heuristic as nix-shell
-  if [[ ! -f $shellfile ]]; then
-    shellfile=default.nix
-  fi
+    local shell="shell.nix"
+    if [[ ! -f "${shell}" ]]; then
+        shell="default.nix"
+    fi
 
-  if [[ ! -f $shellfile ]]; then
-    fail "use nix_shell: shell.nix or default.nix not found in the folder"
-  fi
+    if [[ ! -f "${shell}" ]]; then
+        fail "use nix: shell.nix or default.nix not found in the folder"
+    fi
 
-  if [[ -f $drvfile && $(stat -c %Y $shellfile) -gt $(stat -c %Y $drvfile) ]]; then
-    log_status "use nix_shell: removing stale drv"
-    rm "$drvfile"
-  fi
+    local dir="${PWD}"/.direnv
+    local default="${dir}/default"
+    if [[ ! -L "${default}" ]] || [[ ! -d `readlink "${default}"` ]]; then
+        local wd="${dir}/env-`md5sum "${shell}" | cut -c -32`" # TODO: Hash also the nixpkgs version?
+        mkdir -p "${wd}"
 
-  if [[ ! -f $drvfile ]]; then
-    mkdir -p "$wd"
-    # instanciate the drv like it was in a nix-shell
-    IN_NIX_SHELL=1 nix-instantiate \
-      --add-root "$drvfile" --indirect \
-      "$shellfile"
+        local drv="${wd}/env.drv"
+        if [[ ! -f "${drv}" ]]; then
+            log_status "use nix: deriving new environment"
+            IN_NIX_SHELL=1 nix-instantiate --add-root "${drv}" --indirect "${shell}" > /dev/null
+            nix-store -r `nix-store --query --references "${drv}"` --add-root "${wd}/dep" --indirect > /dev/null
+        fi
 
-    nix-store \
-      -r $(nix-store --query --references "$drvfile") \
-      --add-root "$wd/dep" --indirect >/dev/null
-  fi
+        rm -f "${default}"
+        ln -s `basename "${wd}"` "${default}"
+    fi
 
-  direnv_load nix-shell $(readlink -f $drvfile) --run 'direnv dump'
-  watch_file "$shellfile"
+    local drv=`readlink -f "${default}/env.drv"`
+    local dump="${dir}/dump-`md5sum ".envrc" | cut -c -32`-`md5sum ${drv} | cut -c -32`"
+
+    if [[ ! -f "${dump}" ]] || [[ "${XDG_CONFIG_DIR}/direnv/direnvrc" -nt "${dump}" ]]; then
+        log_status "use nix: updating cache"
+
+        old=`find ${dir} -name 'dump-*'`
+        nix-shell "${drv}" --show-trace "$@" --run 'direnv dump' > "${dump}"
+        rm -f ${old}
+    fi
+
+    direnv_load cat "${dump}"
+
+    watch_file "${default}"
+    watch_file shell.nix
+    if [[ ${shell} == "default.nix" ]]; then
+        watch_file default.nix
+    fi
 }
