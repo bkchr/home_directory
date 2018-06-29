@@ -16,8 +16,8 @@ let
 in
 stdenv.mkDerivation {
   name = "picoquic";
-  buildInputs = [ openssl_1_1_1 pkgconfig clang cmake ];
-  LIBCLANG_PATH="${llvmPackages.libclang}/lib";
+  buildInputs = [ openssl_1_1_1 pkgconfig cmake valgrind ];
+  LIBCLANG_PATH="${llvmPackages.clang-unwrapped}/lib";
   shellHook = ''
     export NIX_CXXSTDLIB_LINK=""
   '';
