@@ -63,6 +63,7 @@ values."
                                       google-c-style
                                       switch-buffer-functions
                                       nix-sandbox
+                                      editorconfig
 				      ;; (lsp-mode :location "/home/bastian/.spacemacs.d/plugins/lsp-mode/")
 				      ;; (company-lsp :location "/home/bastian/.spacemacs.d/plugins/company-lsp/")
 				      ;;(lsp-rust :location "/home/bastian/.spacemacs.d/plugins/lsp-rust/")
