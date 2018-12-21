@@ -1,6 +1,6 @@
 with import <nixpkgs> {};
 let
-  myrust = (latest.rustChannels.nightly.rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
+  myrust = ((rustChannelOf { date = "2018-12-06"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
   wasm-gc = rustPlatform.buildRustPackage rec {
     name = "wasm-gc-${version}";
     version = "0.1.11";
@@ -16,5 +16,10 @@ let
 in
 stdenv.mkDerivation {
   name = "substrate";
-  buildInputs = [ myrust wasm-gc openssl pkgconfig cmake python3 ];
+  buildInputs = [ myrust wasm-gc openssl pkgconfig cmake python3 llvmPackages.clang-unwrapped gnuplot ];
+  LIBCLANG_PATH="${llvmPackages.libclang}/lib";
+  RUST_SRC_PATH="${myrust}/lib/rustlib/src/rust/src";
+  shellHook = ''
+    export NIX_CXXSTDLIB_LINK=""
+  '';
 }
