@@ -1,6 +1,6 @@
 with import <nixpkgs> {};
 let
-  myrust = ((rustChannelOf { date = "2018-12-06"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
+  myrust = ((rustChannelOf { date = "2019-01-23"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
   wasm-gc = rustPlatform.buildRustPackage rec {
     name = "wasm-gc-${version}";
     version = "0.1.11";

@@ -1,7 +1,7 @@
 with import <nixpkgs> {};
 
 let
-  myrust = (latest.rustChannels.nightly.rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ];});
+  myrust = ((rustChannelOf { date = "2019-01-08"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ];});
 in
 stdenv.mkDerivation {
   name = "hole_punch";

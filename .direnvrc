@@ -27,50 +27,34 @@
 # `find .direnv -name 'env-*' -and -not -name `readlink .direnv/default` -exec rm -rf {} +`
 #
 use_nix_shell() {
-    set -e
+  local path="default.nix"
 
-    local shell="shell.nix"
-    if [[ ! -f "${shell}" ]]; then
-        shell="default.nix"
-    fi
+  if [ -f "default.nix" ]; then
+    local version="$(stat -c %Y default.nix)"
+  elif [ -f "shell.nix" ]; then
+    local version="$(stat -c %Y shell.nix)"
+  fi
 
-    if [[ ! -f "${shell}" ]]; then
-        fail "use nix: shell.nix or default.nix not found in the folder"
-    fi
+  local cache=".direnv/cache-${version:-unknown}"
 
-    local dir="${PWD}"/.direnv
-    local default="${dir}/default"
-    if [[ ! -L "${default}" ]] || [[ ! -d `readlink "${default}"` ]]; then
-        local wd="${dir}/env-`md5sum "${shell}" | cut -c -32`" # TODO: Hash also the nixpkgs version?
-        mkdir -p "${wd}"
+  if [[ ! -e "$cache" ]] || \
+    [[ "$HOME/.direnvrc" -nt "$cache" ]] || \
+    [[ .envrc -nt "$cache" ]] || \
+    [[ default.nix -nt "$cache" ]] || \
+    [[ shell.nix -nt "$cache" ]];
+  then
+    [ -d .direnv ] || mkdir .direnv
+    local tmp=$(nix-shell --show-trace --pure "$@" \
+      --run "\"$direnv\" dump bash")
+    echo "$tmp" > "$cache"
+  fi
 
-        local drv="${wd}/env.drv"
-        if [[ ! -f "${drv}" ]]; then
-            log_status "use nix: deriving new environment"
-            IN_NIX_SHELL=1 nix-instantiate --add-root "${drv}" --indirect "${shell}" > /dev/null
-            nix-store -r `nix-store --query --references "${drv}"` --add-root "${wd}/dep" --indirect > /dev/null
-        fi
+  local path_backup=$PATH
+  eval "$(< $cache)"
+  export PATH=$PATH:$path_backup
 
-        rm -f "${default}"
-        ln -s `basename "${wd}"` "${default}"
-    fi
-
-    local drv=`readlink -f "${default}/env.drv"`
-    local dump="${dir}/dump-`md5sum ".envrc" | cut -c -32`-`md5sum ${drv} | cut -c -32`"
-
-    if [[ ! -f "${dump}" ]] || [[ "${XDG_CONFIG_DIR}/direnv/direnvrc" -nt "${dump}" ]]; then
-        log_status "use nix: updating cache"
-
-        old=`find ${dir} -name 'dump-*'`
-        nix-shell "${drv}" --show-trace "$@" --run 'direnv dump' > "${dump}"
-        rm -f ${old}
-    fi
-
-    direnv_load cat "${dump}"
-
-    watch_file "${default}"
+  if [[ $# = 0 ]]; then
+    watch_file default.nix
     watch_file shell.nix
-    if [[ ${shell} == "default.nix" ]]; then
-        watch_file default.nix
-    fi
+  fi
 }
