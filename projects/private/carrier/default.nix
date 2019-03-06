@@ -5,7 +5,7 @@ let
 in
 stdenv.mkDerivation {
   name = "hole_punch";
-  buildInputs = [ openssl pkgconfig clang python2 python2Packages.yapf qemu myrust ];
+  buildInputs = [ openssl pkgconfig clang python2 python2Packages.yapf myrust ];
   LIBCLANG_PATH="${llvmPackages.libclang}/lib";
   shellHook = ''
     export NIX_CXXSTDLIB_LINK=""

@@ -1,1 +1,0 @@
-(setq completion-in-region-function 'ivy-completion-in-region)

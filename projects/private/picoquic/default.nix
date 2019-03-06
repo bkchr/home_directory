@@ -1,6 +1,6 @@
 with import <nixpkgs> {};
 let
-  myrust = ((rustChannelOf { date = "2019-01-26"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
+  myrust = ((rustChannelOf { date = "2019-03-05"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
 in 
 stdenv.mkDerivation {
   name = "picoquic";
