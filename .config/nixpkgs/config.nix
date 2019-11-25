@@ -1,1 +1,1 @@
-{ allowUnfree = true; android_sdk.accept_license = true; }
+{ allowUnfree = true; android_sdk.accept_license = true; allowBroken = true; }

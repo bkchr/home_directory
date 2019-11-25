@@ -1,6 +1,6 @@
 with import <nixpkgs> {};
 let
-  myrust = (latest.rustChannels.nightly.rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ];});
+  myrust = (rustChannelOf { date = "2019-07-19"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" "clippy-preview" ];};
 in
 stdenv.mkDerivation {
   name = "private";

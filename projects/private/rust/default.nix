@@ -1,5 +1,5 @@
 with import <nixpkgs> {};
 stdenv.mkDerivation {
   name = "rust";
-  buildInputs = [ python2 cmake nodejs-9_x wabt openssl pkgconfig zlib ];
+  buildInputs = [ python2 cmake wabt openssl pkgconfig zlib cacert ];
 }
